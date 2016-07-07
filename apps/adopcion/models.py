@@ -6,4 +6,4 @@ class Persona(models.Model):
     edad = models.IntegerField()
     telefono = models.CharField(max_length=12)
     email = models.EmailField()
-    domicilio = models.TextField()
+    domicilio = models.CharField(max_length=100)
