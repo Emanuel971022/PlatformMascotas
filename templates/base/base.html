@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} Document {% endblock %}</title>
+</head>
+<body>
+    {% block header %}
+        {% include 'base/header.html' %}
+    {% endblock %}
+
+    {% block content %}
+        <h4>Éste es el bloque content de base </h4>
+    {% endblock %}
+
+    {% block footer %}
+        <h4>Éste es el bloque footer de base</h4>
+    {% endblock %}
+</body>
+</html>
