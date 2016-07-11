@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %} Registrar mascota {% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" id="save">Guardar</button>
+</form>
+{% endblock %}
