@@ -1,15 +1,22 @@
 {% extends 'base/base.html' %}
 
+{% load staticfiles %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block title %} Listado de mascotas {% endblock %}
 
 {% block content %}
 <table class="table table-bordered">
-    <thead>
+    <thead class="title-table">
         <tr>
             <td>#</td>
             <td>Nombre</td>
             <td>Sexo</td>
             <td>Edad</td>
+            <td>Raza</td>
             <td>Fecha de rescate</td>
             <td>Adoptante</td>
         </tr>
@@ -22,6 +29,7 @@
                     <td>{{mascota.nombre}}</td>
                     <td>{{mascota.sexo}}</td>
                     <td>{{mascota.edad_aproximada}}</td>
+                    <td>{{mascota.raza.nombre}}</td>
                     <td>{{mascota.fecha_rescate}}</td>
                     <td>{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</td>
                 </tr>

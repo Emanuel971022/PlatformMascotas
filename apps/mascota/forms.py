@@ -10,6 +10,7 @@ class MascotaForm(forms.ModelForm):
             'sexo',
             'edad_aproximada',
             'fecha_rescate',
+            'raza',
             'persona',
             'vacuna',
         ]
@@ -19,15 +20,19 @@ class MascotaForm(forms.ModelForm):
             'sexo':'Sexo',
             'edad_aproximada':'Edad aproximada',
             'fecha_rescate':'Fecha de rescate',
+            'raza':'Raza',
             'persona':'Adoptante',
             'vacuna':'Vacunas',
         }
 
+        CHOICES = [('Macho', 'Macho'), ('Hembra', 'Hembra')]
+
         widgets = {
             'nombre': forms.TextInput(attrs={'class':'form-control'}),
-            'sexo': forms.TextInput(attrs={'class':'form-control'}),
+            'sexo': forms.RadioSelect(choices=CHOICES),
             'edad_aproximada': forms.TextInput(attrs={'class':'form-control'}),
             'fecha_rescate': forms.DateInput(attrs={'class':'form-control'}),
+            'raza': forms.Select(attrs={'class':'form-control'}),
             'persona': forms.Select(attrs={'class':'form-control'}),
             'vacuna': forms.CheckboxSelectMultiple(),
         }
