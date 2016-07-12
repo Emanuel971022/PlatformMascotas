@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Listado de razas {% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered">
+    {% if razas %}
+    <thead class="title-table">
+    <tr>
+        <td>#</td>
+        <td>Nombre</td>
+        <td>Descripción</td>
+        <td>Detalles</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for raza in razas %}
+    <tr>
+        <td>{{raza.id}}</td>
+        <td>{{raza.nombre}}</td>
+        <td>{{raza.descripcion}}</td>
+        <td><a href="">Ver más</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    {% else %}
+        <h1>No hay registros de razas</h1>
+    {% endif %}
+</table>
+{% endblock %}

@@ -2,15 +2,15 @@
 
 {% load staticfiles %}
 
+{% block title %} Registrar razas {% endblock %}
+
 {% block extracss %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 
-{% block title %} Registrar mascota {% endblock %}
-
 {% block content %}
 <form method="post">
-    <h1>Registrar mascota</h1>
+    <h1>Registrar raza</h1>
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" id="save">Guardar</button>

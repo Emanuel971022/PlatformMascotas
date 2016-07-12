@@ -1,5 +1,6 @@
+
 from django import forms
-from apps.mascota.models import Mascota
+from apps.mascota.models import Mascota, Vacuna, Raza
 
 class MascotaForm(forms.ModelForm):
     class Meta:
@@ -25,7 +26,7 @@ class MascotaForm(forms.ModelForm):
             'vacuna':'Vacunas',
         }
 
-        CHOICES = [('Macho', 'Macho'), ('Hembra', 'Hembra')]
+        CHOICES = [('M', 'Macho'), ('F', 'Hembra')]
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class':'form-control'}),
@@ -35,4 +36,42 @@ class MascotaForm(forms.ModelForm):
             'raza': forms.Select(attrs={'class':'form-control'}),
             'persona': forms.Select(attrs={'class':'form-control'}),
             'vacuna': forms.CheckboxSelectMultiple(),
+}
+
+class VacunaForm(forms.ModelForm):
+    class Meta:
+        model = Vacuna
+
+        fields = [
+            'nombre',
+            'descripcion',
+        ]
+
+        label = {
+            'nombre': 'Nombre',
+            'descripcion': 'Descripción del medicamento',
+        }
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class':'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class':'form-control'}),
+        }
+
+class RazaForm(forms.ModelForm):
+    class Meta:
+        model = Raza
+
+        fields = [
+            'nombre',
+            'descripcion',
+        ]
+
+        label = {
+            'nombre': 'Nombre',
+            'descripcion': 'Información de la raza',
+        }
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control'}),
         }

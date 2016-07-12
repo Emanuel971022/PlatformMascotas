@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Listado de vacunas {% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered">
+    {% if vacunas %}
+    <thead class="title-table">
+        <tr>
+            <td>#</td>
+            <td>Nombre</td>
+            <td>Descripción</td>
+            <td>Detalles</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for vacuna in vacunas %}
+    <tr>
+        <td>{{vacuna.id}}</td>
+        <td>{{vacuna.nombre}}</td>
+        <td>{{vacuna.descripcion}}</td>
+        <td><a href="">Ver más</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    {% else %}
+        <h1>No hay registros de vacunas</h1>
+    {% endif %}
+</table>
+{% endblock %}

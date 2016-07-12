@@ -6,11 +6,11 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 
-{% block title %} Registrar mascota {% endblock %}
+{% block title%}Registrar vacuna{% endblock%}
 
-{% block content %}
+{%block content %}
 <form method="post">
-    <h1>Registrar mascota</h1>
+    <h1>Registrar vacuna</h1>
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" id="save">Guardar</button>
