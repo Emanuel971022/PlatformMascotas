@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Eliminar raza {% endblock %}
+
+{% block content %}
+<form method="post">
+    <h1>Confirmación para eliminar raza</h1>
+    {% csrf_token %}
+    <h3>¿Seguro que desea eliminar el registro de {{raza.nombre}}?</h3>
+    <br>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-default" href="{% url 'mascota:raza_listar' %}">Cancelar</a>
+
+</form>
+{% endblock %}

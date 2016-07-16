@@ -26,7 +26,7 @@ class MascotaForm(forms.ModelForm):
             'vacuna':'Vacunas',
         }
 
-        CHOICES = [('M', 'Macho'), ('F', 'Hembra')]
+        CHOICES = [('Macho', 'Macho'), ('Hembra', 'Hembra')]
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class':'form-control'}),

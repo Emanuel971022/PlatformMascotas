@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %} Raza {{mascota.nombre}} {% endblock %}
+
+{% block content %}
+<h3>Nombre: {{mascota.nombre}}</h3>
+<h4>Sexo: {{mascota.sexo}}</h4>
+<h4>Edad: {{mascota.edad_aproximada}} anos</h4>
+<h4>Fecha de rescate: {{mascota.fecha_rescate}}</h4>
+<h4>Adoptante: {{mascota.persona.nombre}} {{mascota.persona.apellidos}}</h4>
+<div class="action-btn">
+    <a class="btn btn-default" href="{% url 'mascota:mascota_editar' mascota.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'mascota:mascota_eliminar' mascota.id %}">Eliminar</a>
+</div>
+{% endblock %}

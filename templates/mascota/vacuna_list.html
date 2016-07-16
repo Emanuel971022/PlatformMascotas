@@ -13,7 +13,6 @@
     {% if vacunas %}
     <thead class="title-table">
         <tr>
-            <td>#</td>
             <td>Nombre</td>
             <td>Descripción</td>
             <td>Detalles</td>
@@ -22,10 +21,9 @@
     <tbody>
     {% for vacuna in vacunas %}
     <tr>
-        <td>{{vacuna.id}}</td>
         <td>{{vacuna.nombre}}</td>
         <td>{{vacuna.descripcion}}</td>
-        <td><a href="">Ver más</a></td>
+        <td><a class="btn btn-success" href="{% url 'mascota:vacuna_detalles' vacuna.id %}">Ver más</a></td>
     </tr>
     {% endfor %}
     </tbody>

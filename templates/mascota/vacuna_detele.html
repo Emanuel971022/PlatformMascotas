@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Eliminar vacuna {% endblock %}
+
+{% block content %}
+<form method="post">
+    <h1>Confirmación para eliminar vacuna</h1>
+    {% csrf_token %}
+    <h3>¿Seguro que desea eliminar el registro de {{vacuna.nombre}}?</h3>
+    <br>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-default" href="{% url 'mascota:raza_listar' %}">Cancelar</a>
+
+</form>
+{% endblock %}

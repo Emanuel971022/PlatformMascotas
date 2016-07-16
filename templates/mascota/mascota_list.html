@@ -9,29 +9,31 @@
 {% block title %} Listado de mascotas {% endblock %}
 
 {% block content %}
-<table class="table table-bordered">
+<table class="table table-bordered" id="myTable">
     <thead class="title-table">
         <tr>
-            <td>#</td>
             <td>Nombre</td>
             <td>Sexo</td>
             <td>Edad</td>
             <td>Raza</td>
             <td>Fecha de rescate</td>
             <td>Adoptante</td>
+            <td>Detalles</td>
         </tr>
     </thead>
     <tbody>
         {% if mascotas %}
             {% for mascota in mascotas %}
                 <tr>
-                    <td>{{mascota.id}}</td>
                     <td>{{mascota.nombre}}</td>
                     <td>{{mascota.sexo}}</td>
                     <td>{{mascota.edad_aproximada}}</td>
                     <td>{{mascota.raza.nombre}}</td>
                     <td>{{mascota.fecha_rescate}}</td>
                     <td>{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</td>
+                    <td>
+                        <a class="btn btn-success" href="{% url 'mascota:mascota_detalles' mascota.id %}">Ver más</a>
+                    </td>
                 </tr>
             {% endfor %}
         {% else %}

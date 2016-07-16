@@ -5,6 +5,10 @@ from .models import Mascota, Vacuna, Raza
 def index(request):
     return render(request, 'mascota/index.html')
 
+"""
+    Vistas relacionadas con las mascotas
+"""
+
 def mascota_view(request):
     if request.method == 'POST':
         form = MascotaForm(request.POST)
@@ -19,6 +23,33 @@ def mascota_view(request):
 def mascota_list(request):
     mascota = Mascota.objects.all()
     return render(request, 'mascota/mascota_list.html', {'mascotas':mascota})
+
+def mascota_detail(request, id_mascota):
+    mascota = Mascota.objects.get(id=id_mascota)
+    return render(request, 'mascota/mascota_detail.html', {'mascota': mascota})
+
+def mascota_edit(request, id_mascota):
+    mascota = Mascota.objects.get(id=id_mascota)
+    if request.method == "GET":
+        form = MascotaForm(instance=mascota)
+    else:
+        form = MascotaForm(request.POST, instance=mascota)
+        if form.is_valid():
+            form.save()
+        return redirect('mascota:mascota_listar')
+
+    return render(request, 'mascota/mascota_form.html', {'form':form})
+
+def mascota_delete(request, id_mascota):
+    mascota = Mascota.objects.get(id=id_mascota)
+    if request.method == 'POST':
+        mascota.delete()
+        return redirect('mascota:mascota_listar')
+    return render(request, 'mascota/mascota_delete.html', {'mascota': mascota})
+
+"""
+    Vistas relacionadas con las vacunas
+"""
 
 def vacuna_add(request):
     if request.method == 'POST':
@@ -35,6 +66,33 @@ def vacuna_list(request):
     vacuna = Vacuna.objects.all()
     return render(request, 'mascota/vacuna_list.html', {'vacunas':vacuna})
 
+def vacuna_detail(request, id_vacuna):
+    vacuna = Vacuna.objects.get(id=id_vacuna)
+    return render(request, 'mascota/vacuna_detail.html', {'vacuna':vacuna})
+
+def vacuna_edit(request, id_vacuna):
+    vacuna = Vacuna.objects.get(id=id_vacuna)
+    if request.method == 'GET':
+        form = VacunaForm(instance=vacuna)
+    else:
+        form = VacunaForm(request.POST, instance=vacuna)
+        if form.is_valid():
+            form.save()
+        return redirect('mascota:vacuna_listar')
+
+    return render(request, 'mascota/vacuna_form.html', {'form':form})
+
+def vacuna_delete(request, id_vacuna):
+    vacuna = Vacuna.objects.get(id=id_vacuna)
+    if request.method == 'POST':
+        vacuna.delete()
+        return redirect('mascota:vacuna_listar')
+    return render(request, 'mascota/raza_delete.html', {'vacuna': vacuna})
+
+"""
+    Vistas relacionadas con las razas
+"""
+
 def raza_add(request):
     if request.method == 'POST':
         form = RazaForm(request.POST)
@@ -49,3 +107,26 @@ def raza_add(request):
 def raza_list(request):
     raza = Raza.objects.all()
     return render(request, 'mascota/raza_list.html', {'razas':raza})
+
+def raza_detail(request, id_raza):
+    raza = Raza.objects.get(id=id_raza)
+    return render(request, 'mascota/raza_detail.html', {'raza':raza})
+
+def raza_edit(request, id_raza):
+    raza = Raza.objects.get(id=id_raza)
+    if request.method == 'GET':
+        form = RazaForm(instance=raza)
+    else:
+        form = RazaForm(request.POST, instance=raza)
+        if form.is_valid():
+            form.save()
+        return redirect('mascota:raza_listar')
+
+    return render(request, 'mascota/raza_form.html', {'form':form})
+
+def raza_delete(request, id_raza):
+    raza = Raza.objects.get(id=id_raza)
+    if request.method == 'POST':
+        raza.delete()
+        return redirect('mascota:mascota_listar')
+    return render(request, 'mascota/raza_delete.html', {'raza': raza})

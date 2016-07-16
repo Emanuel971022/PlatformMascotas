@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %} Vacuna {{vacuna.nombre}} {% endblock %}
+
+{% block content %}
+<h2>Vacuna {{vacuna.nombre}}</h2>
+<br>
+<h4>Descripción</h4>
+<p>{{vacuna.descripcion}}</p>
+<div class="action-btn">
+    <a class="btn btn-default" href="{% url 'mascota:vacuna_editar' vacuna.id %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'mascota:vacuna_eliminar' vacuna.id %}">Eliminar</a>
+</div>
+{% endblock %}
