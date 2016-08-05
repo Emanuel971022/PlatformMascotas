@@ -9,10 +9,19 @@
 {% block title %} Vacuna {{vacuna.nombre}} {% endblock %}
 
 {% block content %}
-<h2>Vacuna {{vacuna.nombre}}</h2>
-<br>
-<h4>Descripción</h4>
-<p>{{vacuna.descripcion}}</p>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><strong>Vacuna:</strong> {{vacuna.nombre}}</h3>
+    </div>
+    <div class="panel-body">
+        <p><strong>Descripción:</strong> {{vacuna.descripcion}}</p>
+        <div class="action-btn">
+                <a class="btn btn-info" href="">Ver mascotas relacionadas</a>
+        </div>
+    </div>
+</div>
+
 <div class="action-btn">
     <a class="btn btn-default" href="{% url 'mascota:vacuna_editar' vacuna.id %}">Editar</a>
     <a class="btn btn-danger" href="{% url 'mascota:vacuna_eliminar' vacuna.id %}">Eliminar</a>

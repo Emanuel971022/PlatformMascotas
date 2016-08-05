@@ -9,6 +9,17 @@
 {% block title %} Listado de mascotas {% endblock %}
 
 {% block content %}
+
+{% if mascotas %}
+{% if is_Specific == 'General' %}
+<h2>Listado de mascotas registradas</h2>
+{% elif is_Specific == 'Adoptante' %}
+<h2>Listado de mascotas adoptadas por {{persona.nombre}} {{persona.apellidos}}</h2>
+{% elif is_Specific == 'Vacunas' %}
+<h2>Listado de mascotas con la vacuna {{Vacuna}}</h2>
+{% endif %}
+
+<br>
 <table class="table table-bordered" id="myTable">
     <thead class="title-table">
         <tr>
@@ -17,12 +28,13 @@
             <td>Edad</td>
             <td>Raza</td>
             <td>Fecha de rescate</td>
-            <td>Adoptante</td>
+            {% if not is_Specific == 'Adoptante' %}
+                <td>Adoptante</td>
+            {% endif %}
             <td>Detalles</td>
         </tr>
     </thead>
     <tbody>
-        {% if mascotas %}
             {% for mascota in mascotas %}
                 <tr>
                     <td>{{mascota.nombre}}</td>
@@ -30,15 +42,23 @@
                     <td>{{mascota.edad_aproximada}}</td>
                     <td>{{mascota.raza.nombre}}</td>
                     <td>{{mascota.fecha_rescate}}</td>
-                    <td>{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</td>
+                    {% if not is_Specific == 'Adoptante' %}
+                        {% if mascota.persona %}
+                            <td><a href="{% url 'mascota:mascotas_persona' mascota.persona.id %}" class="link-p">{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</a></td>
+                        {% else %}
+                            <td>Sin adoptar</td>
+                        {% endif %}
+                    {% endif %}
                     <td>
                         <a class="btn btn-success" href="{% url 'mascota:mascota_detalles' mascota.id %}">Ver más</a>
                     </td>
                 </tr>
             {% endfor %}
-        {% else %}
-            <h1>No hay registros de mascotas</h1>
-        {% endif %}
+
     </tbody>
 </table>
+{% else %}
+    <h1>No hay registros de mascotas</h1>
+{% endif %}
+
 {% endblock %}

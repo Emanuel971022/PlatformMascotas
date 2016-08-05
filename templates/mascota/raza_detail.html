@@ -9,10 +9,16 @@
 {% block title %} Raza {{raza.nombre}} {% endblock %}
 
 {% block content %}
-<h2>Raza {{raza.nombre}}</h2>
-<br>
-<h4>Descripción</h4>
-<p>{{raza.descripcion}}</p>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><strong>Raza:</strong> {{raza.nombre}}</h3>
+    </div>
+    <div class="panel-body">
+        <p><strong>Descripción:</strong> {{raza.descripcion}}</p>
+    </div>
+</div>
+
 <div class="action-btn">
     <a class="btn btn-default" href="{% url 'mascota:raza_editar' raza.id %}">Editar</a>
     <a class="btn btn-danger" href="{% url 'mascota:raza_eliminar' raza.id %}">Eliminar</a>

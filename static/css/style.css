@@ -9,3 +9,25 @@
 #save {
     margin-bottom: 20px;
 }
+
+.link-label {
+    color: #FFFFFF;
+    font-size: 105%;
+}
+
+.link-label:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+p {
+    font-size: 105%;
+}
+
+.link-p:hover {
+    text-decoration: none;
+}
+
+#vacunaAling {
+    vertical-align: center;
+}

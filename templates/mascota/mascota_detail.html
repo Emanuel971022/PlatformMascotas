@@ -9,11 +9,29 @@
 {% block title %} Raza {{mascota.nombre}} {% endblock %}
 
 {% block content %}
-<h3>Nombre: {{mascota.nombre}}</h3>
-<h4>Sexo: {{mascota.sexo}}</h4>
-<h4>Edad: {{mascota.edad_aproximada}} anos</h4>
-<h4>Fecha de rescate: {{mascota.fecha_rescate}}</h4>
-<h4>Adoptante: {{mascota.persona.nombre}} {{mascota.persona.apellidos}}</h4>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><strong>Nombre:</strong> {{mascota.nombre}}</h3>
+    </div>
+    <div class="panel-body">
+        <p><strong>Raza:</strong> {{mascota.raza.nombre}}</p>
+        <p><strong>Sexo:</strong> {{mascota.sexo}}</p>
+        <p><strong>Edad:</strong> {{mascota.edad_aproximada}} años</p>
+        <p><strong>Fecha de rescate:</strong> {{mascota.fecha_rescate}}</p>
+        {% if mascota.persona %}
+            <p><strong>Adoptante:</strong> <a href="{% url 'mascota:mascotas_persona' mascota.persona.id %}" class="link-p">{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</a></p>
+        {% endif %}
+        {% if vacunas %}
+        <p><strong>Vacunas</strong></p>
+            {% for vacuna in vacunas %}
+                <span class="label label-primary"><a href="{% url 'mascota:vacuna_MascotasAplicadas' vacuna.id %}" class="link-label">{{vacuna.nombre}}</a></span>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
 <div class="action-btn">
     <a class="btn btn-default" href="{% url 'mascota:mascota_editar' mascota.id %}">Editar</a>
     <a class="btn btn-danger" href="{% url 'mascota:mascota_eliminar' mascota.id %}">Eliminar</a>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import MascotaForm, VacunaForm, RazaForm
 from .models import Mascota, Vacuna, Raza
+from apps.adopcion.models import Persona
 
 def index(request):
     return render(request, 'mascota/index.html')
@@ -22,11 +23,12 @@ def mascota_view(request):
 
 def mascota_list(request):
     mascota = Mascota.objects.all()
-    return render(request, 'mascota/mascota_list.html', {'mascotas':mascota})
+    return render(request, 'mascota/mascota_list.html', {'mascotas':mascota, 'is_Specific':'General'})
 
 def mascota_detail(request, id_mascota):
     mascota = Mascota.objects.get(id=id_mascota)
-    return render(request, 'mascota/mascota_detail.html', {'mascota': mascota})
+    vacunas = mascota.vacuna.all()
+    return render(request, 'mascota/mascota_detail.html', {'mascota': mascota, 'vacunas':vacunas})
 
 def mascota_edit(request, id_mascota):
     mascota = Mascota.objects.get(id=id_mascota)
@@ -46,6 +48,11 @@ def mascota_delete(request, id_mascota):
         mascota.delete()
         return redirect('mascota:mascota_listar')
     return render(request, 'mascota/mascota_delete.html', {'mascota': mascota})
+
+def mascota_mascotasPersona(request, persona_id):
+    mascotasDueno = Mascota.objects.all().filter(persona_id = persona_id)
+    persona = Persona.objects.get(id=persona_id)
+    return render(request, 'mascota/mascota_list.html', {'mascotas':mascotasDueno, 'persona':persona, 'is_Specific':'Adoptante'},)
 
 """
     Vistas relacionadas con las vacunas
@@ -87,7 +94,12 @@ def vacuna_delete(request, id_vacuna):
     if request.method == 'POST':
         vacuna.delete()
         return redirect('mascota:vacuna_listar')
-    return render(request, 'mascota/raza_delete.html', {'vacuna': vacuna})
+    return render(request, 'mascota/vacuna_delete.html', {'vacuna': vacuna})
+
+def vacuna_MascotasVacuna(request, id_vacuna):
+    vacunas = Vacuna.objects.get(id=id_vacuna)
+    MascotasVacuna = vacunas.mascota_set.all()
+    return render(request, 'mascota/mascota_list.html', {'mascotas':MascotasVacuna, 'Vacuna':vacunas, 'is_Specific':'Vacunas'},)
 
 """
     Vistas relacionadas con las razas
