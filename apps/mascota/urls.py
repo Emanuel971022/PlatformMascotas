@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import index,\
     mascota_view, mascota_list, mascota_detail, mascota_edit, mascota_delete, mascota_mascotasPersona, \
     vacuna_add, vacuna_list, vacuna_detail, vacuna_edit, vacuna_delete, vacuna_MascotasVacuna, \
-    raza_add, raza_list, raza_detail, raza_edit, raza_delete
+    raza_add, RazaCreate, raza_list, RazaList, raza_detail, raza_edit, RazaUpdate, raza_delete, RazaDelete
 
 urlpatterns = [
     url(r'^$', index, name='index'),
@@ -21,9 +21,9 @@ urlpatterns = [
     url(r'^vacuna/eliminar/(?P<id_vacuna>\d+)/$', vacuna_delete, name='vacuna_eliminar'),
     url(r'^listar/mascotas/(?P<id_vacuna>\d+)/$', vacuna_MascotasVacuna, name='vacuna_MascotasAplicadas'),
 
-    url(r'^raza/nuevo', raza_add, name='raza_crear'),
-    url(r'^raza/listar', raza_list, name='raza_listar'),
+    url(r'^raza/nuevo', RazaCreate.as_view(), name='raza_crear'),
+    url(r'^raza/listar', RazaList.as_view(), name='raza_listar'),
     url(r'^raza/detalles/(?P<id_raza>\d+)/$', raza_detail, name='raza_detalles'),
-    url(r'^raza/editar/(?P<id_raza>\d+)/$', raza_edit, name='raza_editar'),
-    url(r'^raza/eliminar/(?P<id_raza>\d+)/$', raza_delete, name='raza_eliminar'),
+    url(r'^raza/editar/(?P<pk>\d+)/$', RazaUpdate.as_view(), name='raza_editar'),
+    url(r'^raza/eliminar/(?P<pk>\d+)/$', RazaDelete.as_view(), name='raza_eliminar'),
 ]

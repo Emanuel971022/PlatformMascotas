@@ -12,7 +12,7 @@
 <h2>Listado de razas registradas</h2>
 <br>
 <table class="table table-bordered">
-    {% if razas %}
+    {% if object_list %}
     <thead class="title-table">
     <tr>
         <td>Nombre</td>
@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for raza in razas %}
+    {% for raza in object_list %}
     <tr>
         <td>{{raza.nombre}}</td>
         <td>{{raza.descripcion}}</td>

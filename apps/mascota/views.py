@@ -3,6 +3,9 @@ from .forms import MascotaForm, VacunaForm, RazaForm
 from .models import Mascota, Vacuna, Raza
 from apps.adopcion.models import Persona
 
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 def index(request):
     return render(request, 'mascota/index.html')
 
@@ -24,6 +27,10 @@ def mascota_view(request):
 def mascota_list(request):
     mascota = Mascota.objects.all()
     return render(request, 'mascota/mascota_list.html', {'mascotas':mascota, 'is_Specific':'General'})
+
+class MascotaList(ListView):
+    model = Mascota
+    template_name = 'mascota/mascota_list.html'
 
 def mascota_detail(request, id_mascota):
     mascota = Mascota.objects.get(id=id_mascota)
@@ -116,9 +123,19 @@ def raza_add(request):
 
     return render(request, 'mascota/raza_form.html', {'form': form})
 
+class RazaCreate(CreateView):
+    model = Raza
+    form_class = RazaForm
+    template_name = 'mascota/raza_form.html'
+    success_url = reverse_lazy('mascota:mascota_listar')
+
 def raza_list(request):
     raza = Raza.objects.all()
     return render(request, 'mascota/raza_list.html', {'razas':raza})
+
+class RazaList(ListView):
+    model = Raza
+    template_name = 'mascota/raza_list.html'
 
 def raza_detail(request, id_raza):
     raza = Raza.objects.get(id=id_raza)
@@ -136,9 +153,20 @@ def raza_edit(request, id_raza):
 
     return render(request, 'mascota/raza_form.html', {'form':form})
 
+class RazaUpdate(UpdateView):
+    model = Raza
+    form_class = RazaForm
+    template_name = 'mascota/raza_form.html'
+    success_url = reverse_lazy('mascota:raza_listar')
+
 def raza_delete(request, id_raza):
     raza = Raza.objects.get(id=id_raza)
     if request.method == 'POST':
         raza.delete()
         return redirect('mascota:mascota_listar')
     return render(request, 'mascota/raza_delete.html', {'raza': raza})
+
+class RazaDelete(DeleteView):
+    model = Raza
+    template_name = 'mascota/raza_delete.html'
+    success_url = reverse_lazy('mascota:raza_listar')
