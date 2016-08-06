@@ -11,26 +11,27 @@
 {% block content %}
 <h2>Listado de razas registradas</h2>
 <br>
-<table class="table table-bordered">
-    {% if object_list %}
-    <thead class="title-table">
-    <tr>
-        <td>Nombre</td>
-        <td>Descripción</td>
-        <td>Detalles</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for raza in object_list %}
-    <tr>
-        <td>{{raza.nombre}}</td>
-        <td>{{raza.descripcion}}</td>
-        <td><a class="btn btn-success" href="{% url 'mascota:raza_detalles' raza.id %}">Ver más</a></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-    {% else %}
-        <h1>No hay registros de razas</h1>
-    {% endif %}
-</table>
+{% if object_list %}
+    <table class="table table-bordered">
+        <thead class="title-table">
+            <tr>
+                <td>Nombre</td>
+                <td>Descripción</td>
+                <td>Detalles</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raza in object_list %}
+            <tr>
+                <td>{{raza.nombre}}</td>
+                <td>{{raza.descripcion}}</td>
+                <td><a class="btn btn-success" href="{% url 'mascota:raza_detalles' raza.id %}">Ver más</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h1>No hay registros de razas</h1>
+{% endif %}
+
 {% endblock %}
