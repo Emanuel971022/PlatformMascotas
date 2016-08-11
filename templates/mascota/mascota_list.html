@@ -35,26 +35,25 @@
         </tr>
     </thead>
     <tbody>
-            {% for mascota in mascotas %}
-                <tr>
-                    <td>{{mascota.nombre}}</td>
-                    <td>{{mascota.sexo}}</td>
-                    <td>{{mascota.edad_aproximada}}</td>
-                    <td>{{mascota.raza.nombre}}</td>
-                    <td>{{mascota.fecha_rescate}}</td>
-                    {% if not is_Specific == 'Adoptante' %}
-                        {% if mascota.persona %}
-                            <td><a href="{% url 'mascota:mascotas_persona' mascota.persona.id %}" class="link-p">{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</a></td>
-                        {% else %}
-                            <td>Sin adoptar</td>
-                        {% endif %}
-                    {% endif %}
-                    <td>
-                        <a class="btn btn-success" href="{% url 'mascota:mascota_detalles' mascota.id %}">Ver más</a>
-                    </td>
-                </tr>
-            {% endfor %}
-
+    {% for mascota in mascotas %}
+    <tr>
+        <td>{{mascota.nombre}}</td>
+        <td>{{mascota.sexo}}</td>
+        <td>{{mascota.edad_aproximada}}</td>
+        <td>{{mascota.raza.nombre}}</td>
+        <td>{{mascota.fecha_rescate}}</td>
+        {% if not is_Specific == 'Adoptante' %}
+            {% if mascota.persona %}
+                <td><a href="{% url 'mascota:mascotas_persona' mascota.persona.id %}" class="link-p">{{mascota.persona.nombre}} {{mascota.persona.apellidos}}</a></td>
+            {% else %}
+                <td>Sin adoptar</td>
+            {% endif %}
+        {% endif %}
+        <td>
+            <a class="btn btn-success" href="{% url 'mascota:mascota_detalles' mascota.id %}">Ver más</a>
+        </td>
+    </tr>
+    {% endfor %}
     </tbody>
 </table>
 {% else %}
