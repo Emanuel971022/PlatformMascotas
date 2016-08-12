@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^mascota/', include('apps.mascota.urls', namespace="mascota")),
     url(r'^adopcion/', include('apps.adopcion.urls', namespace="adopcion")),
+    url(r'^usuario/', include('apps.usuario.urls', namespace="usuario")),
 ]
