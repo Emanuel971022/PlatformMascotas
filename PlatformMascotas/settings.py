@@ -1,4 +1,6 @@
 import os
+from django.core.urlresolvers import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '55q_^10an+8^y8^ct-a07+_terril)v=x7r6=iq2gv!czmupti'
@@ -85,3 +87,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 '''STATIC_ROOT = os.path.join(BASE_DIR, 'static')'''
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+LOGIN_REDIRECT_URL = reverse_lazy('adopcion:solicitud_listar')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
