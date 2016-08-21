@@ -142,6 +142,7 @@ def raza_list(request):
 class RazaList(ListView):
     model = Raza
     template_name = 'mascota/raza_list.html'
+    paginate_by = 1
 
 def raza_detail(request, id_raza):
     raza = Raza.objects.get(id=id_raza)
