@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 from .views import index,\
+    listado, \
     mascota_view, mascota_list, mascota_detail, mascota_edit, mascota_delete, mascota_mascotasPersona, \
     vacuna_add, vacuna_list, vacuna_detail, vacuna_edit, vacuna_delete, vacuna_MascotasVacuna, \
     raza_add, RazaCreate, raza_list, RazaList, raza_detail, raza_edit, RazaUpdate, raza_delete, RazaDelete
@@ -27,4 +28,6 @@ urlpatterns = [
     url(r'^raza/detalles/(?P<id_raza>\d+)/$', login_required(raza_detail), name='raza_detalles'),
     url(r'^raza/editar/(?P<pk>\d+)/$', login_required(RazaUpdate.as_view()), name='raza_editar'),
     url(r'^raza/eliminar/(?P<pk>\d+)/$', login_required(RazaDelete.as_view()), name='raza_eliminar'),
+
+    url(r'^listado/', listado, name='listado')
 ]

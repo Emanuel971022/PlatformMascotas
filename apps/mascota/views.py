@@ -1,13 +1,19 @@
+from django.contrib.sessions import serializers
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.core import serializers
 from .forms import MascotaForm, VacunaForm, RazaForm
 from .models import Mascota, Vacuna, Raza
 from apps.adopcion.models import Persona
-
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
 def index(request):
     return render(request, 'mascota/index.html')
+
+def listado(request):
+    lista = serializers.serialize('json',  Mascota.objects.all())
+    return HttpResponse(lista)
 
 """
     Vistas relacionadas con las mascotas
